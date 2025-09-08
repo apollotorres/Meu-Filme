@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone da Netflix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #141414;
+        }
+        /* Estilo customizado para a barra de rolagem horizontal */
+        .movie-row::-webkit-scrollbar {
+            height: 8px;
+        }
+        .movie-row::-webkit-scrollbar-thumb {
+            background-color: #333;
+            border-radius: 10px;
+        }
+        .movie-row::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+        .hero-gradient {
+            background-image: linear-gradient(to top, #141414, transparent 50%);
+        }
+        .logo {
+            color: #E50914;
+            font-weight: bold;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- Cabeçalho -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-4 bg-gradient-to-b from-black to-transparent transition-colors duration-300" id="navbar">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="logo">FILMES</h1>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#" class="hover:text-gray-300">Início</a>
+                <a href="#" class="hover:text-gray-300">Séries</a>
+                <a href="#" class="hover:text-gray-300">Filmes</a>
+                <a href="#" class="hover:text-gray-300">Bombando</a>
+                <a href="#" class="hover:text-gray-300">Minha Lista</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <!-- Ícone de busca -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer hover:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <!-- Ícone de perfil -->
+                <div class="w-8 h-8 bg-gray-600 rounded-md overflow-hidden">
+                    <img src="https://placehold.co/32x32/E50914/FFFFFF?text=U" alt="Ícone do perfil" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção Principal (Hero) -->
+    <main>
+        <section class="relative h-[65vh] md:h-[90vh] flex items-center justify-start text-left">
+            <div class="absolute inset-0">
+                <img src="https://i.imgur.com/HZrY0e8.png" alt="Pôster do filme 1988" class="w-full h-full object-cover opacity-50">
+                <div class="absolute inset-0 hero-gradient"></div>
+            </div>
+            <div class="relative z-10 container mx-auto px-4 md:px-8 max-w-2xl">
+                <h2 class="text-4xl md:text-6xl font-bold mb-4">1988</h2>
+                <p class="text-lg mb-6 leading-relaxed hidden md:block">
+                    Com humor e sátira, "1988" aborda a criação da nova Constituição brasileira, explorando temas cruciais como a luta para tornar o racismo um crime e a expansão do direito de voto para as mulheres. Uma visão cômica do "antes e depois" de um país que redescobria a democracia.
+                </p>
+                <div class="flex space-x-4">
+                    <button id="watch-button" class="bg-white text-black font-bold py-2 px-6 rounded-md flex items-center space-x-2 hover:bg-gray-200 transition-transform transform hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                        </svg>
+                        <span>Assistir</span>
+                    </button>
+                    <button id="info-button" class="bg-gray-700 bg-opacity-70 text-white font-bold py-2 px-6 rounded-md flex items-center space-x-2 hover:bg-gray-600 transition-transform transform hover:scale-105">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Mais Informações</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seções de Filmes -->
+        <div class="container mx-auto px-4 md:px-8 py-8 space-y-12 -mt-16 md:-mt-24 relative z-20">
+            
+            <!-- Categoria: Em Alta -->
+            <section>
+                <h3 class="text-xl md:text-2xl font-semibold mb-4">Em Alta</h3>
+                <div class="movie-row flex overflow-x-auto space-x-4 pb-4">
+                    <!-- Filmes -->
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img id="poster-1988-button" src="https://i.imgur.com/HZrY0e8.png" alt="Pôster do Filme 1988" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/mvOq59N.png" alt="Pôster do Filme Amizade Colorida" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/99d6noT.png" alt="Pôster do Filme O Caderno" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/TezCYtB.png" alt="Pôster do Filme O Calabreso" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                     <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/0AiLyq4.png" alt="Pôster do Filme O Rodízio" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Categoria: Comédias -->
+            <section>
+                <h3 class="text-xl md:text-2xl font-semibold mb-4">Comédias</h3>
+                <div class="movie-row flex overflow-x-auto space-x-4 pb-4">
+                    <!-- Filmes -->
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/TezCYtB.png" alt="Pôster do Filme O Calabreso" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/0AiLyq4.png" alt="Pôster do Filme O Rodízio" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/mvOq59N.png" alt="Pôster do Filme Amizade Colorida" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/99d6noT.png" alt="Pôster do Filme O Caderno" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                    <div class="flex-shrink-0 w-40 md:w-60 group">
+                        <img src="https://i.imgur.com/zsvVo8R.png" alt="Pôster do Filme Leo Prime" class="rounded-md transform transition-transform duration-300 group-hover:scale-105 cursor-pointer">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="container mx-auto px-8 py-12 text-gray-400">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl text-sm">
+            <div class="space-y-3">
+                <a href="#" class="block hover:underline">Perguntas Frequentes</a>
+                <a href="#" class="block hover:underline">Relações com Investidores</a>
+                <a href="#" class="block hover:underline">Formas de Assistir</a>
+                <a href="#" class="block hover:underline">Informações Corporativas</a>
+            </div>
+             <div class="space-y-3">
+                <a href="#" class="block hover:underline">Central de Ajuda</a>
+                <a href="#" class="block hover:underline">Carreiras</a>
+                <a href="#" class="block hover:underline">Termos de Uso</a>
+                <a href="#" class="block hover:underline">Entre em Contato</a>
+            </div>
+             <div class="space-y-3">
+                <a href="#" class="block hover:underline">Conta</a>
+                <a href="#" class="block hover:underline">Resgatar Cartão Pré-pago</a>
+                <a href="#" class="block hover:underline">Privacidade</a>
+                <a href="#" class="block hover:underline">Teste de Velocidade</a>
+            </div>
+             <div class="space-y-3">
+                <a href="#" class="block hover:underline">Media Center</a>
+                <a href="#" class="block hover:underline">Comprar Cartão Pré-pago</a>
+                <a href="#" class="block hover:underline">Preferências de Cookies</a>
+                <a href="#" class="block hover:underline">Avisos Legais</a>
+            </div>
+        </div>
+        <p class="text-sm mt-8">Netflix Clone © 2024</p>
+    </footer>
+
+    <!-- Modal de Mais Informações -->
+    <div id="info-modal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-center items-center p-4 transition-opacity duration-300">
+        <div class="bg-[#181818] rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl">
+            <!-- Botão de Fechar -->
+            <button id="close-modal-button" class="absolute top-3 right-3 text-white hover:text-gray-400 z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Conteúdo do Modal -->
+            <div class="w-full h-64 md:h-80 relative">
+                 <img src="https://i.imgur.com/HZrY0e8.png" alt="Pôster do filme 1988" class="w-full h-full object-cover object-top rounded-t-lg">
+                 <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#181818] to-transparent"></div>
+            </div>
+            <div class="p-6 md:p-8 -mt-16 relative z-20">
+                <h3 class="text-2xl md:text-4xl font-bold mb-4">1988</h3>
+                <div class="flex items-center space-x-4 mb-4 text-gray-300">
+                    <span class="text-green-400 font-semibold">98% Relevante</span>
+                    <span>2025</span>
+                    <span class="border border-gray-500 px-1.5 text-xs">16+</span>
+                    <span>2 min</span>
+                    <span class="border border-gray-500 px-1.5 text-xs rounded-sm">HD</span>
+                </div>
+                <p class="text-gray-300 mb-6 leading-relaxed">Com humor e sátira, "1988" aborda a criação da nova Constituição brasileira, explorando temas cruciais como a luta para tornar o racismo um crime e a expansão do direito de voto para as mulheres. Uma visão cômica do "antes e depois" de um país que redescobria a democracia.</p>
+                 <div class="text-sm space-y-2">
+                    <p><span class="text-gray-500">Elenco:</span> Apollo Torres, Leonardo Calheiros, Luiza, Denner Luis, Ana Clara, Ana Carolina e Tamara</p>
+                    <p><span class="text-gray-500">Participação Especial:</span> Renan Cordeiro</p>
+                    <p><span class="text-gray-500">Gêneros:</span> Comédia, Sátira Política, Nacional</p>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal do Player de Vídeo -->
+    <div id="video-player-modal" class="hidden fixed inset-0 bg-black bg-opacity-90 z-[60] flex justify-center items-center p-4 transition-opacity duration-300">
+        <div class="relative w-full max-w-4xl">
+            <!-- Botão de Fechar -->
+            <button id="close-video-modal-button" class="absolute -top-10 right-0 text-white hover:text-gray-400 z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+                <!-- A tag <video> foi substituída por um <iframe> para usar o player do Vimeo -->
+                <iframe id="vimeo-player" class="w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Efeito de escurecer a navbar ao rolar a página
+        const navbar = document.getElementById('navbar');
+        window.onscroll = () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black');
+            } else {
+                navbar.classList.remove('bg-black');
+            }
+        };
+
+        // Lógica do Modal de Informações
+        const infoButton = document.getElementById('info-button');
+        const infoModal = document.getElementById('info-modal');
+        const closeModalButton = document.getElementById('close-modal-button');
+        const poster1988Button = document.getElementById('poster-1988-button');
+
+        const openModal = () => {
+            infoModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Impede o scroll do fundo
+        };
+
+        const closeModal = () => {
+            infoModal.classList.add('hidden');
+            document.body.style.overflow = ''; // Libera o scroll do fundo
+        };
+
+        infoButton.addEventListener('click', openModal);
+        closeModalButton.addEventListener('click', closeModal);
+        poster1988Button.addEventListener('click', openModal);
+
+        // Fechar modal ao clicar fora da área de conteúdo
+        infoModal.addEventListener('click', (event) => {
+            if (event.target === infoModal) {
+                closeModal();
+            }
+        });
+
+        // Fechar modal ao pressionar a tecla 'Esc'
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !infoModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // --- LÓGICA DO PLAYER DE VÍDEO ---
+        const watchButton = document.getElementById('watch-button');
+        const videoPlayerModal = document.getElementById('video-player-modal');
+        const closeVideoModalButton = document.getElementById('close-video-modal-button');
+        const vimeoPlayer = document.getElementById('vimeo-player');
+        // URL de incorporação do Vimeo. Os parâmetros no final limpam a aparência do player.
+        const vimeoVideoUrl = "https://player.vimeo.com/video/1116631902?autoplay=1&title=0&byline=0&portrait=0";
+
+        const openVideoPlayer = () => {
+            vimeoPlayer.src = vimeoVideoUrl; // Define o URL para começar a carregar o vídeo
+            videoPlayerModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeVideoPlayer = () => {
+            videoPlayerModal.classList.add('hidden');
+            document.body.style.overflow = '';
+            vimeoPlayer.src = ""; // Pára o vídeo ao remover o URL do iframe
+        };
+
+        watchButton.addEventListener('click', openVideoPlayer);
+        closeVideoModalButton.addEventListener('click', closeVideoPlayer);
+        
+        // Fechar player ao clicar fora
+        videoPlayerModal.addEventListener('click', (event) => {
+            if (event.target === videoPlayerModal) {
+                closeVideoPlayer();
+            }
+        });
+
+        // Fechar player com a tecla 'Esc'
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !videoPlayerModal.classList.contains('hidden')) {
+                closeVideoPlayer();
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
